@@ -78,7 +78,7 @@ def _read_raw_pairs(path: str) -> Dict[str, str]:
                         f"got: {raw_line!r}"
                     )
                 key, _, value = line.partition("=")
-                if '#' in value:
+                if "#" in value:
                     value, ignore = value.split("#", 1)
                 pairs[key.strip().upper()] = value.strip()
     except OSError as exc:
@@ -90,8 +90,7 @@ def _parse_int(pairs: Dict[str, str], key: str) -> int:
     try:
         return int(pairs[key])
     except ValueError as exc:
-        raise ConfigError(f"{key} must be an integer, got: {pairs[key]!r}") \
-            from exc
+        raise ConfigError(f"{key} must be an integer, got: {pairs[key]!r}") from exc
 
 
 def _parse_coordinates(pairs: Dict[str, str], key: str) -> Tuple[int, int]:
@@ -102,8 +101,7 @@ def _parse_coordinates(pairs: Dict[str, str], key: str) -> Tuple[int, int]:
     try:
         return int(parts[0].strip()), int(parts[1].strip())
     except ValueError as exc:
-        raise ConfigError(f"{key} coordinates must be integers: {raw!r}") \
-            from exc
+        raise ConfigError(f"{key} coordinates must be integers: {raw!r}") from exc
 
 
 def _parse_bool(pairs: Dict[str, str], key: str) -> bool:
@@ -112,9 +110,9 @@ def _parse_bool(pairs: Dict[str, str], key: str) -> bool:
         return True
     if value in ("false", "0", "no"):
         return False
-    raise ConfigError(f"{key} must be a boolean (True/False), got:"
-                      f" {pairs[key].strip()!r}"
-                      )
+    raise ConfigError(
+        f"{key} must be a boolean (True/False), got:" f" {pairs[key].strip()!r}"
+    )
 
 
 def load_config(path: str) -> MazeConfig:
@@ -160,13 +158,11 @@ def load_config(path: str) -> MazeConfig:
         raise ConfigError("OUTPUT_FILE must not be empty")
 
     seed = int(pairs["SEED"]) if "SEED" in pairs and pairs["SEED"] else None
-    random.seed(seed)
     algorithm = pairs.get("ALGORITHM", "backtracker")
-    extra_passages = (
-        _parse_int(pairs, "EXTRA_PASSAGES") if "EXTRA_PASSAGES" in pairs
-        else random.randrange(2, 32, 5)
-    )
-    print(extra_passages)
+    if "EXTRA_PASSAGES" in pairs:
+        extra_passages = _parse_int(pairs, "EXTRA_PASSAGES")
+    else:
+        extra_passages = random.Random(seed).randrange(2, 32, 5)
 
     for name, point in (("ENTRY", entry), ("EXIT", exit_)):
         x, y = point

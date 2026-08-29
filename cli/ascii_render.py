@@ -108,7 +108,9 @@ def render(
     pattern_colour: str = _PATTERN_COLOURS.get(
         pattern_color, _PATTERN_COLOURS["default"]
     )
-    path_cells: Set[Tuple[int, int]] = _path_cells(maze) if show_path else set()
+    path_cells: Set[Tuple[int, int]] = (
+        _path_cells(maze) if show_path else set()
+    )
 
     lines: List[str] = []
 
@@ -129,7 +131,9 @@ def render(
             )
             top_line += east_wall
 
-            south: str = wall_colour + _WALL_ROW + _RESET if cell.walls["S"] else "  "
+            south: str = (
+                wall_colour + _WALL_ROW + _RESET if cell.walls["S"] else "  "
+            )
             bottom_line += south
             bottom_line += wall_colour + _WALL_BLOCK + _RESET
         lines.append(top_line)
@@ -190,7 +194,10 @@ def run_interactive(
         show_title(_PATTERN_COLOURS[pattern_color])
         print(
             render(
-                maze, show_path=show_path, colour=colour, pattern_color=pattern_color
+                maze,
+                show_path=show_path,
+                colour=colour,
+                pattern_color=pattern_color
             )
         )
         write_output(maze, config.output_file)
@@ -215,9 +222,9 @@ def run_interactive(
         elif choice == "c":
             colour = colours[(colours.index(colour) + 1) % len(colours)]
         elif choice == "f":
-            pattern_color = pattern_colours[
-                (pattern_colours.index(pattern_color) + 1) % len(pattern_colours)
-            ]
+            len_pat_col = len(pattern_colours)
+            idx = (pattern_colours.index(pattern_color) + 1) % len_pat_col
+            pattern_color = pattern_colours[idx]
         elif choice == "q":
             break
         else:

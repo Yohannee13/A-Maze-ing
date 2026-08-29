@@ -37,10 +37,14 @@ def parse_args(argv: list[str]) -> CliArgs:
 
         if arg == "--display":
             if i + 1 >= len(argv):
-                raise SystemExit("error: --display requires an argument (ascii or mlx)")
+                raise SystemExit(
+                    "error: --display requires an argument (ascii or mlx)"
+                )
             value: str = argv[i + 1]
             if value not in ("ascii", "mlx"):
-                raise SystemExit(f"error: invalid choice '{value}' for --display")
+                raise SystemExit(
+                    f"error: invalid choice '{value}' for --display"
+                )
             display = value
             i += 2
 

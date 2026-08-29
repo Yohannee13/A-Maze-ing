@@ -17,8 +17,8 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 
-[tool.setuptools.packages.find]
-where = ["."]
+[tool.setuptools]
+packages = ["mazegen"]
 
 [tool.mypy]
 python_version = "3.10"

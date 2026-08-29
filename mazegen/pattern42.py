@@ -9,7 +9,8 @@ linked to any neighbor: they stay fully enclosed (hexadecimal ``F``).
 """
 
 from typing import List
-import sys
+
+from .errors import MazeError
 
 _DIGIT_4 = [
     "X.X",
@@ -74,6 +75,9 @@ def pattern_cells(
             if char == "X":
                 cell = (offset_x + col_index, offset_y + row_index)
                 if cell == entry or cell == exit_:
-                    raise MazeError("Error: entry/exit in pattern 42, please check it")
+                    raise MazeError(
+                        f"entry/exit {cell} falls inside the mandatory '42' "
+                        "pattern; move ENTRY/EXIT or resize the maze"
+                    )
                 cells.append(cell)
     return cells

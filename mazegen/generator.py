@@ -23,6 +23,7 @@ import random
 from typing import Dict, List, Optional, Tuple
 
 from .cell import DIRECTIONS, OFFSET, Cell
+from .errors import MazeError
 
 try:
     from .pattern42 import pattern_cells, MIN_WIDTH, MIN_HEIGHT
@@ -41,12 +42,6 @@ except ImportError:
 
 
 Coordinates = Tuple[int, int]
-
-
-class MazeError(Exception):
-    """Raised when the maze configuration is invalid."""
-
-    pass
 
 
 class MazeGenerator:
