@@ -16,12 +16,17 @@ from typing import Optional, Callable, Any
 from cli.config_parser import ConfigError, MazeConfig, load_config
 from cli.output_writer import write_output
 from mazegen import MazeError, MazeGenerator
+from dataclasses import dataclass
 
 # Type aliases pour améliorer la lisibilité
 MazeFactory = Callable[[Optional[int]], MazeGenerator]
 
-
-def parse_args(argv: list[str]) -> Any:
+@dataclass
+class CliArgs:
+    config: str
+    display: str
+    
+def parse_args(argv: list[str]) -> CliArgs:
     """Parse command-line arguments manually (replaces argparse)."""
     config: Optional[str] = None
     display: str = "ascii"
@@ -51,14 +56,8 @@ def parse_args(argv: list[str]) -> Any:
     if config is None:
         raise SystemExit("error: missing required argument 'config'")
 
-    # Dummy class to keep the original args.config / args.display dot notation
-    class Args:
-        def __init__(self, config: str, display: str) -> None:
-            self.config: str = config
-            self.display: str = display
 
-    args: Args = Args(config, display)
-    return args
+    return CliArgs(config=config, display=display)
 
 
 def build_maze_factory(config: MazeConfig) -> MazeFactory:
