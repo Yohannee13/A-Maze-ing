@@ -90,7 +90,8 @@ def _parse_int(pairs: Dict[str, str], key: str) -> int:
     try:
         return int(pairs[key])
     except ValueError as exc:
-        raise ConfigError(f"{key} must be an integer, got: {pairs[key]!r}") from exc
+        raise ConfigError(f"{key} must be an integer, got: {pairs[key]!r}") \
+            from exc
 
 
 def _parse_coordinates(pairs: Dict[str, str], key: str) -> Tuple[int, int]:
@@ -101,7 +102,8 @@ def _parse_coordinates(pairs: Dict[str, str], key: str) -> Tuple[int, int]:
     try:
         return int(parts[0].strip()), int(parts[1].strip())
     except ValueError as exc:
-        raise ConfigError(f"{key} coordinates must be integers: {raw!r}") from exc
+        raise ConfigError(f"{key} coordinates must be integers: {raw!r}") \
+            from exc
 
 
 def _parse_bool(pairs: Dict[str, str], key: str) -> bool:
@@ -111,7 +113,8 @@ def _parse_bool(pairs: Dict[str, str], key: str) -> bool:
     if value in ("false", "0", "no"):
         return False
     raise ConfigError(
-        f"{key} must be a boolean (True/False), got:" f" {pairs[key].strip()!r}"
+        f"{key} must be a boolean (True/False), got:"
+        f" {pairs[key].strip()!r}"
     )
 
 

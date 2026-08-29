@@ -47,7 +47,8 @@ Accessing the generated structure
 """
 
 from .cell import Cell
-from .generator import MazeError, MazeGenerator
+from .errors import MazeError
+from .generator import MazeGenerator
 
 __all__ = ["MazeGenerator", "MazeError", "Cell"]
 __version__ = "1.0.0"

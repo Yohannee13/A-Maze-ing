@@ -181,7 +181,11 @@ class MazeGenerator:
     def _unvisited_neighbors(self, cell: Cell) -> Dict[str, Cell]:
         result: Dict[str, Cell] = {}
         for direction, neighbor in cell.neighbors.items():
-            if neighbor is not None and not neighbor.visited and not neighbor.blocked:
+            if (
+                neighbor is not None
+                and not neighbor.visited
+                and not neighbor.blocked
+            ):
                 result[direction] = neighbor
         return result
 
@@ -275,7 +279,9 @@ class MazeGenerator:
     def _check_connectivity(self) -> None:
         """Ensure entry and exit are connected (sanity check)."""
         if self.shortest_path() is None:
-            raise MazeError("generated maze is invalid: no path between entry and exit")
+            raise MazeError(
+                "generated maze is invalid: no path between entry and exit"
+            )
 
     def shortest_path(self) -> Optional[List[str]]:
         """Compute the shortest path from entry to exit.

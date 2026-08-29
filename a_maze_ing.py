@@ -21,11 +21,13 @@ from dataclasses import dataclass
 # Type aliases pour améliorer la lisibilité
 MazeFactory = Callable[[Optional[int]], MazeGenerator]
 
+
 @dataclass
 class CliArgs:
     config: str
     display: str
-    
+
+
 def parse_args(argv: list[str]) -> CliArgs:
     """Parse command-line arguments manually (replaces argparse)."""
     config: Optional[str] = None
@@ -59,7 +61,6 @@ def parse_args(argv: list[str]) -> CliArgs:
 
     if config is None:
         raise SystemExit("error: missing required argument 'config'")
-
 
     return CliArgs(config=config, display=display)
 
