@@ -10,6 +10,7 @@ import os
 from mazegen import Cell, MazeGenerator
 from cli.output_writer import write_output
 from cli.config_parser import MazeConfig
+import sys
 
 _WALL_COLOURS: dict[str, str] = {
     "default": "\033[90m",
@@ -158,6 +159,12 @@ def _cell_symbol(
     if coords in path_cells:
         return _PATH_COLOUR + _PATH_SYMBOL + _RESET
     return "  "
+
+
+def fail(message: str) -> None:
+    """Print a clear error message and exit with a non-zero status."""
+    print(f"error: {message}", file=sys.stderr)
+    sys.exit(1)
 
 
 def run_interactive(
