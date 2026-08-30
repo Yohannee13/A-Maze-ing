@@ -82,8 +82,9 @@ def _read_raw_pairs(path: str) -> Dict[str, str]:
                     value, ignore = value.split("#", 1)
                 if key in pairs:
                     raise ConfigError(f"Redundant key: {key}")
-                if key == "OUTPUT_FILE".lower():
-                    if value[len(value)-4:len(value)] != ".txt":
+                if key == "OUTPUT_FILE" or key == "output_file":
+                    file_extension = value.rsplit(".")[1]
+                    if file_extension != "txt":
                         raise ConfigError("Output file must be a .txt")
                 pairs[key.strip().upper()] = value.strip()
     except OSError as exc:
