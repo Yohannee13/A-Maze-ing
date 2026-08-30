@@ -160,7 +160,7 @@ def load_config(path: str) -> MazeConfig:
     if not output_file:
         raise ConfigError("OUTPUT_FILE must not be empty")
 
-    seed = int(pairs["SEED"]) if "SEED" in pairs and pairs["SEED"] else None
+    seed = _parse_int(pairs["SEED"]) if "SEED" in pairs and pairs["SEED"] else None
     algorithm = pairs.get("ALGORITHM", "backtracker")
     if "EXTRA_PASSAGES" in pairs:
         extra_passages = _parse_int(pairs, "EXTRA_PASSAGES")
