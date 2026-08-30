@@ -200,7 +200,10 @@ def run_interactive(
                 pattern_color=pattern_color
             )
         )
-        write_output(maze, config.output_file)
+        try:
+            write_output(maze, config.output_file)
+        except OSError as exc:
+            fail(f"could not write output file '{config.output_file}': {exc}")
         print(help_text)
         try:
             choice: str = input("> ").strip().lower()
