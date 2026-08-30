@@ -164,8 +164,9 @@ def load_config(path: str) -> MazeConfig:
         seed = int(pairs["SEED"])\
             if "SEED" in pairs and pairs["SEED"] else None
     except ValueError as exc:
-        raise ConfigError(f"SEED must be an integer, got:\
-            {pairs['SEED']!r}") from exc
+        raise ConfigError(
+            f"SEED must be an integer, got: {pairs['SEED']!r}"
+        ) from exc
 
     algorithm = pairs.get("ALGORITHM", "backtracker")
     if "EXTRA_PASSAGES" in pairs:
