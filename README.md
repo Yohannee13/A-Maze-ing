@@ -88,7 +88,7 @@ Blank lines and lines starting with `#` are ignored, and inline comments
 | `EXIT`            | yes       | `x,y`           | Coordinates of the exit cell (must be inside the grid, different from ENTRY) |
 | `OUTPUT_FILE`     | yes       | string          | Path of the file the maze is written to                                    |
 | `PERFECT`         | yes       | boolean         | `True`/`False`, `1`/`0`, `yes`/`no` — whether the maze has exactly one solution |
-| `SEED`            | no        | integer         | Seed for 
+| `SEED`            | no        | integer         | Seed for reproducible generation |
 | `EXTRA_PASSAGES`  | no        | integer         | Number of extra passages (loops) to try to add when `PERFECT=False`        |
 
 Example:
@@ -206,6 +206,10 @@ the command line tool:
       shared tests for `mazegen` before building the CLI on top of it,
       and settle on config/file formats between teammates before
       writing the parser and writer in parallel(so we will improve conections).
+      - **Anticipated planning**: we initially planned to split work by
+      feature (generation, then output, then display) but switched early
+      to a split by layer (`mazegen` vs `cli`) once we realized it let us
+      work fully in parallel without merge conflicts.
 
 - **Tools used**:
     - Git/GitHub for version control
