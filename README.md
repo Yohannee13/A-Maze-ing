@@ -158,6 +158,8 @@ the command line tool:
 - `mazegen/` — the reusable package:
   - `cell.py`: the `Cell` class (walls, neighbours, hexadecimal
     encoding) and the shared direction constants.
+  - `errors.py`: exposes the MazeError exception raised when a problem
+    is encountered
   - `generator.py`: the `MazeGenerator` class, which builds the grid,
     carves the maze, adds extra passages, checks connectivity, and
     computes the shortest path (BFS) between entry and exit. It has no
