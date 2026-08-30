@@ -194,7 +194,8 @@ def run_interactive(
     pattern_color: str = "default"
     help_text: str = (
         "\nControls: [r] regenerate  [p] show/hide path  "
-        "[c] change colour  [q] quit [f] pattern colour\n"
+        "[c] change colour  [q] quit [f] pattern colour "
+        "[o] return to initial\n"
     )
 
     while True:
@@ -235,6 +236,8 @@ def run_interactive(
             len_pat_col = len(pattern_colours)
             idx = (pattern_colours.index(pattern_color) + 1) % len_pat_col
             pattern_color = pattern_colours[idx]
+        elif choice == "o":
+            maze = build_maze(initial_seed)
         elif choice == "q":
             break
         else:
