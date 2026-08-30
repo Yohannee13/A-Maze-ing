@@ -313,10 +313,8 @@ class MazeGenerator:
     ) -> List[str]:
         steps: List[str] = []
         node: Cell = goal
-        while visited[node] is not None:
-            previous: Cell
-            direction: str
-            previous, direction = visited[node]  # type: ignore[misc]
+        while (entry := visited[node]) is not None:
+            previous, direction = entry
             steps.append(direction)
             node = previous
         steps.reverse()

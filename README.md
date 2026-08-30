@@ -202,11 +202,11 @@ the command line tool:
       easy to work in parallel without stepping on each other's code;
       the iterative backtracker turned out simple to test in isolation
       once `Cell`/`MazeGenerator` had no CLI dependencies.
-   - **What we'd do differently next time (What we will improve)**: write a couple of small
+    - **What we'd do differently next time (What we will improve)**: write a couple of small
       shared tests for `mazegen` before building the CLI on top of it,
       and settle on config/file formats between teammates before
       writing the parser and writer in parallel(so we will improve conections).
-      - **Anticipated planning**: we initially planned to split work by
+    - **Anticipated planning**: we initially planned to split work by
       feature (generation, then output, then display) but switched early
       to a split by layer (`mazegen` vs `cli`) once we realized it let us
       work fully in parallel without merge conflicts.
