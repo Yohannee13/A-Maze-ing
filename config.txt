@@ -3,7 +3,6 @@ WIDTH=20
 HEIGHT=20
 ENTRY=0,0
 EXIT=4,4
-# Bogosy be fralaiav
 OUTPUT_FILE=maze.txt
 PERFECT=false
 EXTRA_PASSAGES=5
