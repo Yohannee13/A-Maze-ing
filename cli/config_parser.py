@@ -80,6 +80,11 @@ def _read_raw_pairs(path: str) -> Dict[str, str]:
                 key, _, value = line.partition("=")
                 if "#" in value:
                     value, ignore = value.split("#", 1)
+                if key in pairs:
+                    raise ConfigError(f"Redundant key: {key}")
+                if key == "OUTPUT_FILE".lower():
+                    if value[len(value)-4:len(value)] != ".txt":
+                        raise ConfigError("Output file must be a .txt")
                 pairs[key.strip().upper()] = value.strip()
     except OSError as exc:
         raise ConfigError(f"cannot read config file '{path}': {exc}") from exc
